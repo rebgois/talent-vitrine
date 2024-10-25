@@ -1,3 +1,11 @@
+# Talent Vitrine Rebeca
+
+Este projeto está disponível online! Acesse a aplicação no link abaixo:
+
+[**Acesse o Talent Vitrine na Vercel**](https://talent-vitrine-rebeca.vercel.app/Vitrine)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
