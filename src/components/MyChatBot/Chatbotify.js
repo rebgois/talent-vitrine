@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import Chatbot from "react-chatbotify";
 import avatarBot from "../../assets/bot/bot-rebeca-bg-green.jpg";
 
 const MyChatBot = () => {
   const flow = {
     start: {
-      message: "Que bom que chegou até aqui! <3 Sobre o que você quer saber mais de mim?",
+      message: "Que bom que está aqui! 🚀💙 Vamos conhecer mais sobre mim e minhas habilidades? Escolha o que deseja explorar:",
       options: [
         "Minhas Soft Skills",
         "Hard Skills",
@@ -31,73 +31,94 @@ const MyChatBot = () => {
       },
     },
     soft_skills: {
-      message: "Minhas principais soft skills são comunicação eficaz, trabalho em equipe e adaptabilidade.",
-      options: ["Comunicação", "Trabalho em equipe", "Adaptabilidade", "Voltar"],
+      message: 
+        "Minhas soft skills são meu diferencial! Sou comunicativa, colaborativa e extremamente adaptável aos desafios. Qual delas você quer saber mais?",
+      options: ["Comunicação", "Trabalho em Equipe", "Adaptabilidade", "Voltar ao Início"],
       path: (params) => {
         switch (params.userInput) {
           case "Comunicação":
             return "comunicacao";
-          case "Trabalho em equipe":
+          case "Trabalho em Equipe":
             return "equipe";
           case "Adaptabilidade":
             return "adaptabilidade";
-          case "Voltar":
-            return "start";
           default:
-            return "soft_skills";
+            return "start";
         }
       },
     },
     comunicacao: {
-      message: "Acredito que comunicar ideias de forma clara e empática é essencial para um trabalho colaborativo.",
-      path: "soft_skills",
+      message: 
+        "Acredito que uma comunicação clara e empática é a base para construir relacionamentos e resolver problemas de forma eficaz.",
+      options: ["Voltar ao Início"],
+      path: () => "start",
     },
     equipe: {
-      message: "Trabalhar em equipe me motiva porque acredito que grandes projetos são fruto de colaboração.",
-      path: "soft_skills",
+      message: 
+        "Colaborar é onde encontro minha motivação! Grandes projetos são resultado da união de talentos e perspectivas diversas.",
+      options: ["Voltar ao Início"],
+      path: () => "start",
     },
     adaptabilidade: {
-      message: "Sou uma pessoa que aprende rápido e se adapta a novos contextos com facilidade.",
-      path: "soft_skills",
+      message: 
+        "Aprender rápido e se adaptar a novos contextos são minhas marcas registradas. Estou sempre pronta para encarar mudanças e desafios!",
+      options: ["Voltar ao Início"],
+      path: () => "start",
     },
     hard_skills: {
-      message: "Tenho experiência em React, Node.js, SQL e testes automatizados.",
-      options: ["React", "Node.js", "SQL", "Testes", "Voltar"],
+      message: 
+        "Combinando expertise técnica e curiosidade constante, desenvolvo soluções eficazes com as seguintes tecnologias. Qual delas quer explorar?",
+      options: ["UX", "React", "JavaScript", "Voltar ao Início"],
       path: (params) => {
         switch (params.userInput) {
+          case "UX":
+            return "ux_skill";
           case "React":
             return "react_skill";
-          case "Node.js":
-            return "node_skill";
-          case "SQL":
-            return "sql_skill";
-          case "Testes":
-            return "testes_skill";
-          case "Voltar":
-            return "start";
+          case "JavaScript":
+            return "js_skill";
           default:
-            return "hard_skills";
+            return "start";
         }
       },
     },
+    ux_skill: {
+      message: 
+        "É essencial que os projetos sejam intuitivos e utilizem estratégias compatíveis com o objetivo de cada página. Meu foco é desenvolver com essa perspectiva.",
+      options: ["Voltar ao Início"],
+      path: () => "start",
+    },
     react_skill: {
-      message: "Adoro trabalhar com React, especialmente criando componentes dinâmicos.",
-      path: "hard_skills",
+      message: 
+        "Adoro desenvolver interfaces dinâmicas e acessíveis com React, garantindo experiências incríveis para o usuário final. Uso bibliotecas como Material-UI e React Bootstrap.",
+      options: ["Voltar ao Início"],
+      path: () => "start",
+    },
+    js_skill: {
+      message: 
+        "Domino JavaScript para criar aplicações interativas e responsivas, otimizando a experiência do usuário com soluções eficientes.",
+      options: ["Voltar ao Início"],
+      path: () => "start",
     },
     projetos: {
-      message: "Tenho trabalhado em sistemas de gerenciamento e um chatbot de recrutamento.",
-      path: "start",
+      message: 
+        "Tenho orgulho dos projetos que desenvolvi, como um sistema de gerenciamento de carreira com práticas para as micro-habilidades relacionadas a uma carreira específica. Cada desafio é uma nova oportunidade de crescimento!",
+      options: ["Voltar ao Início"],
+      path: () => "start",
     },
     motivacao: {
-      message: "O que mais me motiva é criar soluções que impactem pessoas e o aprendizado contínuo.",
-      path: "start",
+      message: 
+        "Sou motivada por criar soluções que fazem a diferença na vida das pessoas e pela busca constante por aprendizado e inovação. Gosto de usar criatividade e flexibilidade.",
+      options: ["Voltar ao Início"],
+      path: () => "start",
     },
     pessoal: {
-      message: "Fora dos códigos, sou alguém que gosta de viajar, ler e aprender coisas novas.",
-      path: "start",
+      message: 
+        "Além do código, sou apaixonada por viajar, explorar novas culturas, praticar esportes como corrida e Stand Up Paddle, ler e nunca parar de aprender. Equilibrar a vida pessoal e profissional é essencial para mim!",
+      options: ["Voltar ao Início"],
+      path: () => "start",
     },
   };
-  
 
   const settings = {
     header: { title: "Rebeca", avatar: avatarBot },
@@ -121,7 +142,7 @@ const MyChatBot = () => {
     chatButtonStyle: {
       size: 70,
       backgroundImage: `url(${avatarBot})`,
-      backgroundColor: "0D5E9F#",
+      backgroundColor: "#0D5E9F",
       boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.2)",
       borderRadius: "50%",
     },
