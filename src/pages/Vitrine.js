@@ -1,79 +1,74 @@
 import { useState, useEffect } from "react";
-import MyChatBot from "../components/Chatbotify.js/Chatbotify";
+import rebeca from "../assets/main-box-bg/rebeca.PNG";
+import MyChatBot from "../components/MyChatBot/Chatbotify"; // Importando o chatbot
 
-const App = () => {
-  const [showImages, setShowImages] = useState([false, false, false]);
+const Vitrine = () => {
+  const [visible, setVisible] = useState([true, false, false]);
 
-  // Animação de entrada das imagens
+  // Alternar visibilidade das imagens em loop
   useEffect(() => {
-    const timers = showImages.map(
-      (_, index) =>
-        setTimeout(() => {
-          setShowImages((prev) => {
-            const newState = [...prev];
-            newState[index] = true;
-            return newState;
-          });
-        }, index * 400) // Atraso progressivo
-    );
-    return () => timers.forEach((timer) => clearTimeout(timer));
-  }, []);
+    let currentIndex = 0;
+    const interval = setInterval(() => {
+      setVisible((prevVisible) =>
+        prevVisible.map((_, index) => index === currentIndex)
+      );
+      currentIndex = (currentIndex + 1) % visible.length;
+    }, 2000);
+
+    return () => clearInterval(interval);
+  }, [visible.length]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-indigo-50 to-indigo-200 p-6">
       {/* Imagem Principal */}
       <div className="w-full max-w-3xl rounded-xl overflow-hidden shadow-xl mb-8 transform hover:scale-105 transition-all duration-300">
         <img
-          src="https://via.placeholder.com/1200x600"
-          alt="Imagem Principal"
+          src={rebeca}
+          alt="Background Vitrine de Talentos da Rebeca"
           className="w-full object-cover"
         />
       </div>
 
       {/* Descrição */}
-      <div className="text-center max-w-2xl">
-        <h1 className="text-4xl font-extrabold text-gray-800 leading-tight mb-4">
+      <div className="text-center max-w-2xl px-4">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-gray-800 leading-tight mb-4">
           Transforme Suas Ideias em Realidade
         </h1>
-        <p className="text-lg text-gray-600 mb-8">
+        <p className="text-base md:text-lg text-gray-600 mb-8">
           Explore nossos serviços de excelência e leve seu negócio para o
-          próximo nível. Estamos aqui para fazer suas ideias acontecerem.
+          próximo nível.
         </p>
       </div>
 
       {/* Imagens com Animação */}
-      <div className="flex space-x-6 mt-4">
-        {[
-          "https://via.placeholder.com/100",
-          "https://via.placeholder.com/100",
-          "https://via.placeholder.com/100",
-        ].map((src, index) => (
-          <img
-            key={index}
-            src={src}
-            alt={`Imagem ${index + 1}`}
-            className={`w-24 h-24 rounded-full border-4 border-white shadow-lg transform transition-all duration-500 ${
-              showImages[index]
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 translate-y-10"
-            }`}
-          />
-        ))}
+      <div className="flex flex-wrap justify-center space-x-0 md:space-x-6 mt-4">
+        {["https://via.placeholder.com/200", "https://via.placeholder.com/200", "https://via.placeholder.com/200"].map(
+          (src, index) => (
+            <img
+              key={index}
+              src={src}
+              alt={`Imagem ${index + 1}`}
+              className={`w-32 h-32 md:w-48 md:h-48 rounded-lg shadow-lg border-4 border-white object-cover transform transition-all duration-1000 ${
+                visible[index] ? "opacity-100 scale-100" : "opacity-0 scale-90"
+              }`}
+            />
+          )
+        )}
       </div>
 
       {/* Botão "Contrate Agora" */}
       <button
-        className="mt-12 px-10 py-4 bg-gradient-to-r from-indigo-500 to-blue-500 text-white 
-        text-lg font-bold rounded-full shadow-lg hover:shadow-2xl hover:scale-105 
+        className="mt-12 px-8 py-3 md:px-10 md:py-4 bg-gradient-to-r from-indigo-500 to-blue-500 text-white 
+        text-base md:text-lg font-bold rounded-full shadow-lg hover:shadow-2xl hover:scale-105 
         transition-all duration-300 ease-in-out focus:outline-none"
       >
         Contrate agora
       </button>
-      <div className="fixed bottom-4 right-4">
-        <MyChatBot />
-      </div>
+
+      {/* Chatbot */}
+      <MyChatBot />
     </div>
   );
 };
 
-export default App;
+export default Vitrine;
